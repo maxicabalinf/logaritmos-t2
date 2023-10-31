@@ -1,4 +1,5 @@
 #include "stats.h"
+#include <functional>
 
 std::pair<double, double> confidence_interval(int percentage, double mean, double stdev, int n_samples) {
     double sqrt_n = sqrt(n_samples);
@@ -13,7 +14,7 @@ stats calculate_stats(std::vector<double> &samples) {
 
     std::vector<double> diff(samples.size());
     std::transform(samples.begin(), samples.end(), diff.begin(),
-                   std::bind2nd(std::minus<double>(), mean));
+                   std::bind(std::minus<double>(), std::placeholders::_1, mean));
     double sq_sum = std::inner_product(diff.begin(), diff.end(), diff.begin(), 0.0);
     double stdev = std::sqrt(sq_sum / samples.size());
 
