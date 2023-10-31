@@ -50,9 +50,9 @@ int main(void) {
             auto stop = std::chrono::high_resolution_clock::now();
             auto delta_t_radix = std::chrono::duration_cast<std::chrono::duration<double, std::milli>>(stop - start).count();
 
-            auto start = std::chrono::high_resolution_clock::now();
+            start = std::chrono::high_resolution_clock::now();
             quick_sort(quick_out_of_order);
-            auto stop = std::chrono::high_resolution_clock::now();
+            stop = std::chrono::high_resolution_clock::now();
             auto delta_t_quick = std::chrono::duration_cast<std::chrono::duration<double, std::milli>>(stop - start).count();
 
             radix_times.push_back(delta_t_radix);
