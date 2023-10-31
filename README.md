@@ -4,3 +4,8 @@ Este proyecto usa CMake para compilar sus ejecutables. Puede correr el siguiente
     
     # shell
     cmake -B build -S ./; cmake --build build
+
+## Componentes del proyecto
+* `stats`: Implementa el cálculo de estadísticas para una muestra de experimentos.
+* `sorting`: Funciones de ordenamiento
+* `comparison`: Ejecuta el experimento para comparar Radix sort con Quicksort
