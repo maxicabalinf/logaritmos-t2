@@ -1,10 +1,11 @@
 #include <chrono>
+#include <fstream>
 #include <random>
 
 #include "sorting.h"
 #include "stats.h"
-// Tamaño n de arreglo fijo 100000000
-#define N 100000000
+
+#define N 100000000 // Tamaño de arreglo a comparar
 #define K 1  // TODO fijar K definitivo
 // Crear arreglos aleatorios con números entre [1,u] con u en [2, 2^2, 2^3, ..., 2^64]
 // al menos 100 repeticiones por cada tamaño de universo. Cada repetición debe ser con un arreglo distinto y se debe usar el mismo arreglo para ambos métodos.
@@ -12,6 +13,7 @@
   - tiempo de ordenamiento promedio de radix sort según número de bits k y tamaño del universo.
   - tiempo de ordenamiento promedio por tamaño del universo entre radix sort y quick sort
 */
+const std::string EXPERIMENTS_FOLDER = "./experiments";
 
 /**
  * @brief Rellena un vector con elementos aleatorios de un universo discreto [1, u]
@@ -37,6 +39,9 @@ void random_fill(std::vector<ull> &target, ull upper_bound) {
  * @brief Registra en archivo los tiempos de ejecución de Radix sort y Quicksort sobre un mismo vector aleatorio con elementos de un universo discreto [1, u], con u en el rango [2, 2^2, 2^3, ... , 2^64].
  */
 int main(void) {
+    std::fstream
+        radix_results(EXPERIMENTS_FOLDER + "radix_results", std::ios::out | std::ios::binary),
+        quick_results(EXPERIMENTS_FOLDER + "quick_results", std::ios::out | std::ios::binary);
     for (int exponent = 1; exponent <= 64; exponent++) {
         ull MAX_RANGE = pow(2, exponent);
         std::vector<double> radix_times, quick_times;
@@ -61,7 +66,8 @@ int main(void) {
         }
         stats radix_stats = calculate_stats(radix_times);
         stats quick_stats = calculate_stats(quick_times);
-        // TODO imprimir estadísticas por u
+        save_results(radix_results, MAX_RANGE, radix_stats);
+        save_results(quick_results, MAX_RANGE, quick_stats);
     }
     return 0;
 }
