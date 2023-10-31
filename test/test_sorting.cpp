@@ -11,11 +11,11 @@ void test_bucket_sort(void) {
 void test_radix_sort(void) {
     std::vector<ull> sortee = {1, 20, 39, 47, 28, 8};
     std::vector<ull> expected = {1, 8, 20, 28, 39, 47};
-    radix_sort(sortee);
+    radix_sort(sortee, 1);
     assert(sortee == expected);
 }
 
-int main(int argc, char *argv[]) {
+int main(void) {
     test_bucket_sort();
     test_radix_sort();
     return 0;
