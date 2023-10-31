@@ -20,12 +20,6 @@ typedef std::tuple<
     stats;
 
 /**
- * @brief Diccionario con los valores críticos para los intervalos de confianza del 95% y del 99%.
- *
- */
-std::map<int, double> critical_values{{95, 1.96}, {99, 2.576}};
-
-/**
  * @brief Calcula el intervalo de confianza de una muestra.
  *
  * @param percentage Porcentaje de confianza.

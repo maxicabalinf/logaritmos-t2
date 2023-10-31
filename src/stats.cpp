@@ -4,6 +4,12 @@
 #include <functional>
 #include <string>
 
+/**
+ * @brief Diccionario con los valores críticos para los intervalos de confianza del 95% y del 99%.
+ *
+ */
+std::map<int, double> critical_values{{95, 1.96}, {99, 2.576}};
+
 std::pair<double, double> confidence_interval(int percentage, double mean, double stdev, int n_samples) {
     double sqrt_n = sqrt(n_samples);
     double offset = critical_values[percentage] * stdev / sqrt_n;
