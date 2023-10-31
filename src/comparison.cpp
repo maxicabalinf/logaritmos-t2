@@ -12,7 +12,7 @@
   - tiempo de ordenamiento promedio por tamaño del universo entre radix sort y quick sort
 */
 
-int main(int argc, char *argv[]) {
+int main(void) {
     for (int exponent = 1; exponent <= 64; exponent++) {
         ull MAX_RANGE = pow(2, exponent);
         std::vector<double> radix_times(100), quick_times(100);
@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
             std::random_device rnd_device;
             // Specify the engine and distribution.
             std::mt19937 mersenne_engine{rnd_device()};  // Generates random integers
-            std::uniform_int_distribution<int> dist{1, MAX_RANGE};
+            std::uniform_int_distribution<ull> dist{1, MAX_RANGE};
 
             auto gen = [&dist, &mersenne_engine]() {
                 return dist(mersenne_engine);
