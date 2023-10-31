@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 project(t2)
 
 # Especifica directorios para el sistema de compilado.
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/lib")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/lib")
+# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/lib")
+# set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/lib")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
 
 # Define opciones de compilación.
@@ -25,4 +25,4 @@ add_executable(comparison src/comparison.cpp)
 target_link_libraries(comparison experiment_utils)
 
 add_executable(test_sorting test/test_sorting.cpp)
-target_link_libraries(comparison experiment_utils)
+target_link_libraries(test_sorting experiment_utils)
