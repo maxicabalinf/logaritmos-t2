@@ -6,13 +6,6 @@
 #include "stats.h"
 
 #define N 100000000 // Tamaño de arreglo a comparar
-#define K 1  // TODO fijar K definitivo
-// Crear arreglos aleatorios con números entre [1,u] con u en [2, 2^2, 2^3, ..., 2^64]
-// al menos 100 repeticiones por cada tamaño de universo. Cada repetición debe ser con un arreglo distinto y se debe usar el mismo arreglo para ambos métodos.
-/* Comparar:
-  - tiempo de ordenamiento promedio de radix sort según número de bits k y tamaño del universo.
-  - tiempo de ordenamiento promedio por tamaño del universo entre radix sort y quick sort
-*/
 const std::string EXPERIMENTS_FOLDER = "./experiments";
 
 /**
@@ -45,6 +38,7 @@ int main(void) {
     for (int exponent = 1; exponent <= 64; exponent++) {
         ull MAX_RANGE = pow(2, exponent);
         std::vector<double> radix_times, quick_times;
+        int k; // TODO obtener k para cada universo
         for (int repetition = 0; repetition < 100; repetition++) {
             std::vector<ull> radix_out_of_order(N);
             random_fill(radix_out_of_order, MAX_RANGE);
@@ -52,7 +46,7 @@ int main(void) {
 
             // Mide tiempos de ordenamiento
             auto start = std::chrono::high_resolution_clock::now();
-            radix_sort(radix_out_of_order, K);
+            radix_sort(radix_out_of_order, k);
             auto stop = std::chrono::high_resolution_clock::now();
             auto delta_t_radix = std::chrono::duration_cast<std::chrono::duration<double, std::milli>>(stop - start).count();
 
