@@ -1,3 +1,4 @@
+#include <chrono>
 #include <random>
 
 #include "sorting.h"
@@ -29,12 +30,17 @@ int main(void) {
             std::vector<ull> radix_out_of_order(N);
             generate(begin(radix_out_of_order), end(radix_out_of_order), gen);
             std::vector<ull> quick_out_of_order = radix_out_of_order;
-            // Compara tiempo de ordenamiento promedio por tamaño del universo entre radix sort y quick sort
-            // TODO tomar tiempo
-            radix_sort(radix_out_of_order, K);
 
-            // TODO tomar tiempo
+            // Compara tiempo de ordenamiento promedio por tamaño del universo entre radix sort y quick sort
+            auto start = std::chrono::high_resolution_clock::now();
+            radix_sort(radix_out_of_order, K);
+            auto stop = std::chrono::high_resolution_clock::now();
+            auto delta_t_radix = std::chrono::duration_cast<std::chrono::seconds>(stop - start);
+
+            auto start = std::chrono::high_resolution_clock::now();
             quick_sort(quick_out_of_order);
+            auto stop = std::chrono::high_resolution_clock::now();
+            auto delta_t_quick = std::chrono::duration_cast<std::chrono::seconds>(stop - start);
 
             // TODO registrar tiempos
         }
