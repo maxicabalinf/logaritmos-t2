@@ -39,7 +39,7 @@ void random_fill(std::vector<ull> &target, ull upper_bound) {
 int main(void) {
     for (int exponent = 1; exponent <= 64; exponent++) {
         ull MAX_RANGE = pow(2, exponent);
-        std::vector<std::chrono::milliseconds> radix_times, quick_times;
+        std::vector<double> radix_times, quick_times;
         for (int repetition = 0; repetition < 100; repetition++) {
             std::vector<ull> radix_out_of_order(N);
             random_fill(radix_out_of_order, MAX_RANGE);
@@ -49,17 +49,18 @@ int main(void) {
             auto start = std::chrono::high_resolution_clock::now();
             radix_sort(radix_out_of_order, K);
             auto stop = std::chrono::high_resolution_clock::now();
-            auto delta_t_radix = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+            auto delta_t_radix = std::chrono::duration_cast<std::chrono::duration<double, std::milli>>(stop - start).count();
 
             auto start = std::chrono::high_resolution_clock::now();
             quick_sort(quick_out_of_order);
             auto stop = std::chrono::high_resolution_clock::now();
-            auto delta_t_quick = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+            auto delta_t_quick = std::chrono::duration_cast<std::chrono::duration<double, std::milli>>(stop - start).count();
 
             radix_times.push_back(delta_t_radix);
             quick_times.push_back(delta_t_quick);
         }
-        // TODO calcular estadísticas
+        stats radix_stats = calculate_stats(radix_times);
+        stats quick_stats = calculate_stats(quick_times);
         // TODO imprimir estadísticas por u
     }
     return 0;
