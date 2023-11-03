@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <chrono>
 #include <fstream>
 #include <random>
@@ -5,7 +6,7 @@
 #include "sorting.h"
 #include "stats.h"
 
-#define N 100000000 // Tamaño de arreglo a comparar
+#define N 100000000  // Tamaño de arreglo a comparar
 const std::string EXPERIMENTS_FOLDER = "./experiments";
 
 /**
@@ -38,7 +39,7 @@ int main(void) {
     for (int exponent = 1; exponent <= 64; exponent++) {
         ull MAX_RANGE = pow(2, exponent);
         std::vector<double> radix_times, quick_times;
-        int k; // TODO obtener k para cada universo
+        int k;  // TODO obtener k para cada universo
         for (int repetition = 0; repetition < 100; repetition++) {
             std::vector<ull> radix_out_of_order(N);
             random_fill(radix_out_of_order, MAX_RANGE);
