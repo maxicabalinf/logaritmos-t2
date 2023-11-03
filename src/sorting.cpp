@@ -1,22 +1,20 @@
 #include "sorting.h"
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <random>
-#include <ctime>
-#include <chrono>
+
 #include <omp.h>
 
+#include <algorithm>
+#include <chrono>
+#include <ctime>
+#include <iostream>
+#include <random>
+#include <vector>
 
-
-
-
-void radix_sort(std::vector<ull> &to_be_ordered, int k) {
-  // TODO Implementar
+void radix_sort(std::vector<ull>& to_be_ordered, int k) {
+    // TODO Implementar
 }
 
-void quick_sort(std::vector<ull> &to_be_ordered) {
-  // TODO Implementar
+void quick_sort(std::vector<ull>& to_be_ordered) {
+    // TODO Implementar
 }
 
 void bucket_sort_inplace(std::vector<ull>& to_be_ordered, ull max_val) {
@@ -36,29 +34,28 @@ void bucket_sort_inplace(std::vector<ull>& to_be_ordered, ull max_val) {
     }
 }
 
-
 // Función para generar un arreglo aleatorio con un tamaño y rango dados
 void generateRandomArray(std::vector<ull>& arr, int size, ull range) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<ull> dis(1, range);
 
-    #pragma omp parallel for
+#pragma omp parallel for
     for (int i = 0; i < size; ++i) {
         arr[i] = dis(gen);
     }
 }
 
 int main() {
-    int repetitions = 2; // Número de repeticiones por tamaño de universo
+    int repetitions = 2;  // Número de repeticiones por tamaño de universo
 
     for (int power = 2; power <= 64; ++power) {
-        ull u = 1ULL << power; // Genera u = 2^power
-        int size = 100000000; // Tamaño fijo del arreglo (100 millones) - Ajustado para mantener la misma cantidad de elementos
+        ull u = 1ULL << power;  // Genera u = 2^power
+        int size = 100000000;   // Tamaño fijo del arreglo (100 millones) - Ajustado para mantener la misma cantidad de elementos
 
         double total_time_radix = 0.0, total_time_quick = 0.0;
 
-        std::vector<ull> random_numbers(size); // Crear un único arreglo grande para los números aleatorios
+        std::vector<ull> random_numbers(size);  // Crear un único arreglo grande para los números aleatorios
 
         for (int rep = 0; rep < repetitions; ++rep) {
             // Generar números aleatorios en el mismo arreglo
