@@ -34,7 +34,7 @@ int main(void) {
         for (int k = 1; k <= MAX_EXPONENT; k++) {
             double kth_total_time = 0.0;
 
-            // Toma n_repetitions muestras de tiempo de ordenamiento.
+            // Toma n_repetitions muestras de tiempos de ordenamiento.
             for (int repetition = 0; repetition < n_repetitions; repetition++) {
                 std::vector<unsigned long long> copy = radix_out_of_order;
                 auto start = std::chrono::high_resolution_clock::now();
