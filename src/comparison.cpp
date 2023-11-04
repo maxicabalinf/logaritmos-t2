@@ -42,12 +42,12 @@ int main(void) {
         radix_results(exp_path/"radix_results", std::ios::out | std::ios::binary),
         quick_results(exp_path/"quick_results", std::ios::out | std::ios::binary);
     for (int exponent = 1; exponent <= 64; exponent++) {
-        ull MAX_RANGE = pow(2, exponent);
+        ull u = 1ULL << exponent;
         std::vector<double> radix_times, quick_times;
         int k;  // TODO obtener k para cada universo
         for (int repetition = 0; repetition < 100; repetition++) {
             std::vector<ull> radix_out_of_order(N);
-            random_fill(radix_out_of_order, MAX_RANGE);
+            random_fill(radix_out_of_order, u);
             std::vector<ull> quick_out_of_order = radix_out_of_order;
 
             // Mide tiempos de ordenamiento
@@ -66,8 +66,8 @@ int main(void) {
         }
         stats radix_stats = calculate_stats(radix_times);
         stats quick_stats = calculate_stats(quick_times);
-        save_results(radix_results, MAX_RANGE, radix_stats);
-        save_results(quick_results, MAX_RANGE, quick_stats);
+        save_results(radix_results, u, radix_stats);
+        save_results(quick_results, u, quick_stats);
     }
     return 0;
 }
