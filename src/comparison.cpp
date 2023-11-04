@@ -43,31 +43,40 @@ int main(void) {
         quick_results(exp_path/"quick_results", std::ios::out | std::ios::binary);
     for (int exponent = 1; exponent <= 64; exponent++) {
         ull u = 1ULL << exponent;
+        std::cout << "u=2^" + std::to_string(exponent) << std::endl;
         std::vector<double> radix_times, quick_times;
         int k;  // TODO obtener k para cada universo
         for (int repetition = 0; repetition < 100; repetition++) {
+            std::cout << "Creating random vector ...";
             std::vector<ull> radix_out_of_order(N);
             random_fill(radix_out_of_order, u);
             std::vector<ull> quick_out_of_order = radix_out_of_order;
+            std::cout << " DONE !" << std::endl;
 
             // Mide tiempos de ordenamiento
+            std::cout << "Sorting Radix sort vector ...";
             auto start = std::chrono::high_resolution_clock::now();
             radix_sort(radix_out_of_order, k);
             auto stop = std::chrono::high_resolution_clock::now();
+            std::cout << " DONE !" << std::endl;
             auto delta_t_radix = std::chrono::duration_cast<std::chrono::duration<double, std::milli>>(stop - start).count();
 
+            std::cout << "Sorting Quicksort vector ...";
             start = std::chrono::high_resolution_clock::now();
             quick_sort(quick_out_of_order);
             stop = std::chrono::high_resolution_clock::now();
+            std::cout << " DONE !" << std::endl;
             auto delta_t_quick = std::chrono::duration_cast<std::chrono::duration<double, std::milli>>(stop - start).count();
 
             radix_times.push_back(delta_t_radix);
             quick_times.push_back(delta_t_quick);
         }
+        std::cout << "Calculating stats ...";
         stats radix_stats = calculate_stats(radix_times);
         stats quick_stats = calculate_stats(quick_times);
         save_results(radix_results, u, radix_stats);
         save_results(quick_results, u, quick_stats);
+        std::cout << " SAVED !" << std::endl;
     }
     return 0;
 }
