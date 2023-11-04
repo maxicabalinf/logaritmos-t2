@@ -8,6 +8,13 @@
 #include "sorting.h"
 #include "t2.h"
 
+void write_headers(std::fstream &file) {
+    file << "u ";
+    for (int k = 1; k < MAX_EXPONENT; k++) {
+        file << "k=" + std::to_string(k) + " ";
+    }
+}
+
 int main(void) {
     // Crea directorio de experimentos si no existe
     std::filesystem::path exp_path{EXPERIMENTS_FOLDER};
@@ -18,12 +25,14 @@ int main(void) {
     // Crea archivo que almacenará resultados de experimento.
     std::fstream
         radix_results(exp_path / "optimal_k", std::ios::out | std::ios::binary);
+    write_headers(radix_results);
     
     // Realiza 100 ordenamientos por cada k por cada u.
     std::vector<int> optimals(MAX_K - 1);
     int n_repetitions = 100;
     for (int exponent = 1; exponent <= MAX_EXPONENT; exponent++) {
         std::cout << "u=2^" + std::to_string(exponent) << std::endl;
+        radix_results << "2^" + std::to_string(exponent) +" ";
         unsigned long long u = 1ULL << exponent;
 
         // Crea vector aleatorio.
@@ -55,10 +64,11 @@ int main(void) {
                 optimal_k = k;
             }
             std::cout << "Writing avg. for k=" + std::to_string(k) + " ...";
+            radix_results << std::to_string(kth_avg) +" ";
             std::cout << " DONE !" << std::endl;
         }
-        // TODO WRITE AVGS PER U TO FILE
         optimals[exponent - 1] = optimal_k;
+        radix_results << std::endl;
     }
     // TODO WRITE VECTOR OF OPTIMALS TO FILE
     return 0;
