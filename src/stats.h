@@ -44,4 +44,4 @@ stats calculate_stats(std::vector<double> &samples);
  * @param N Identificador del experimento
  * @param measurements Objeto con los resultados agregados
  */
-void save_results(std::fstream &file, int N, stats &measurements);
+void save_results(std::fstream &file, unsigned long long N, stats &measurements);
