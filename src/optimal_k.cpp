@@ -13,6 +13,7 @@ void write_headers(std::fstream &file) {
     for (int k = 1; k < MAX_EXPONENT; k++) {
         file << "k=" + std::to_string(k) + " ";
     }
+    file << std::endl;
 }
 
 int main(void) {
@@ -44,7 +45,7 @@ int main(void) {
 
         // Encuentra k óptimo para el u actual.
         double min = std::numeric_limits<double>::infinity();
-        int optimal_k;
+        int optimal_k = -1;
         for (int k = 1; k <= MAX_EXPONENT; k++) {
             std::cout << "k=" + std::to_string(k) << std::endl;
             double kth_total_time = 0.0;
