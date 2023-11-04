@@ -24,7 +24,8 @@ int main(void) {
 
     // Crea archivo que almacenará resultados de experimento.
     std::fstream
-        radix_results(exp_path / "optimal_k", std::ios::out | std::ios::binary);
+        radix_results(exp_path / "k_per_u", std::ios::out | std::ios::binary),
+        optimal_results(exp_path / "optimal_k", std::ios::out | std::ios::binary);
     write_headers(radix_results);
     
     // Realiza 100 ordenamientos por cada k por cada u.
@@ -70,6 +71,10 @@ int main(void) {
         optimals[exponent - 1] = optimal_k;
         radix_results << std::endl;
     }
-    // TODO WRITE VECTOR OF OPTIMALS TO FILE
+
+    // Escribe optimos para cada u en archivo.
+    auto len = size(optimals);
+    optimal_results.write(reinterpret_cast<const char*>(&len), sizeof(len));
+    optimal_results.write(reinterpret_cast<const char*>(&optimals[0]), optimals.size()*sizeof(int));
     return 0;
 }
