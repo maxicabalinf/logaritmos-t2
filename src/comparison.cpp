@@ -17,7 +17,7 @@ const std::string EXPERIMENTS_FOLDER = "./experiments";
  * @param upper_bound Máximo del universo
  * @cite Obtenido de StackOverflow - https://stackoverflow.com/a/23143753
  */
-void random_fill(std::vector<ull> &target, int size, ull upper_bound) {
+void random_fill(std::vector<ull>& target, int size, ull upper_bound) {
     // First create an instance of an engine.
     std::random_device rnd_device;
     // Specify the engine and distribution.
@@ -42,9 +42,9 @@ int main(void) {
 
     // Crea archivos que almacenarán resultados de experimento.
     std::fstream
-        radix_results(exp_path/"radix_results", std::ios::out | std::ios::binary),
-        quick_results(exp_path/"quick_results", std::ios::out | std::ios::binary);
-    
+        radix_results(exp_path / "radix_results", std::ios::out | std::ios::binary),
+        quick_results(exp_path / "quick_results", std::ios::out | std::ios::binary);
+
     // Realiza 100 ordenamientos por cada tamaño de universo 2^exponent.
     for (int exponent = 1; exponent <= 64; exponent++) {
         ull u = 1ULL << exponent;
