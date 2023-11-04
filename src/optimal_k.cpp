@@ -58,6 +58,7 @@ int main(void) {
                 auto stop = std::chrono::high_resolution_clock::now();
                 std::cout << " DONE !" << std::endl;
                 auto delta_t = std::chrono::duration_cast<std::chrono::duration<double, std::milli>>(stop - start).count();
+                kth_total_time += delta_t;
             }
             double kth_avg = kth_total_time / (double)n_repetitions;
             if (kth_avg < min) {
