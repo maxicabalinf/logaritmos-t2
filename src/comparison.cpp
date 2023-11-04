@@ -6,31 +6,12 @@
 #include <fstream>
 #include <random>
 
+#include "random_utils.h"
 #include "sorting.h"
 #include "stats.h"
 
 #define N 100'000'000  // Tamaño de arreglo a comparar
 const std::string EXPERIMENTS_FOLDER = "./experiments";
-
-/**
- * @brief Rellena un vector con elementos aleatorios de un universo discreto [1, u]
- *
- * @param target Vector a rellenar
- * @param upper_bound Máximo del universo
- * @cite Obtenido de StackOverflow - https://stackoverflow.com/a/23143753
- */
-void random_fill(std::vector<ull>& target, int size, ull upper_bound) {
-    // First create an instance of an engine.
-    std::random_device rnd_device;
-    // Specify the engine and distribution.
-    std::mt19937 mersenne_engine{rnd_device()};  // Generates random integers
-    std::uniform_int_distribution<ull> dist{1, upper_bound};
-
-#pragma omp parallel for
-    for (int i = 0; i < size; ++i) {
-        target[i] = dist(mersenne_engine);
-    }
-}
 
 /**
  * @brief Registra en archivo los tiempos de ejecución de Radix sort y Quicksort sobre un mismo vector aleatorio con elementos de un universo discreto [1, u], con u en el rango [2, 2^2, 2^3, ... , 2^64].
