@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <chrono>
+#include <filesystem>
 #include <fstream>
 #include <random>
 
@@ -33,6 +34,10 @@ void random_fill(std::vector<ull> &target, ull upper_bound) {
  * @brief Registra en archivo los tiempos de ejecución de Radix sort y Quicksort sobre un mismo vector aleatorio con elementos de un universo discreto [1, u], con u en el rango [2, 2^2, 2^3, ... , 2^64].
  */
 int main(void) {
+    std::filesystem::path exp_path{EXPERIMENTS_FOLDER};
+    if (!std::filesystem::exists(exp_path)) {
+        std::filesystem::create_directory(exp_path);
+    }
     std::fstream
         radix_results(EXPERIMENTS_FOLDER + "radix_results", std::ios::out | std::ios::binary),
         quick_results(EXPERIMENTS_FOLDER + "quick_results", std::ios::out | std::ios::binary);
