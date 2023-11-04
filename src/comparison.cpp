@@ -39,8 +39,8 @@ int main(void) {
         std::filesystem::create_directory(exp_path);
     }
     std::fstream
-        radix_results(EXPERIMENTS_FOLDER + "radix_results", std::ios::out | std::ios::binary),
-        quick_results(EXPERIMENTS_FOLDER + "quick_results", std::ios::out | std::ios::binary);
+        radix_results(exp_path/"radix_results", std::ios::out | std::ios::binary),
+        quick_results(exp_path/"quick_results", std::ios::out | std::ios::binary);
     for (int exponent = 1; exponent <= 64; exponent++) {
         ull MAX_RANGE = pow(2, exponent);
         std::vector<double> radix_times, quick_times;
