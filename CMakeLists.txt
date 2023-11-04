@@ -12,7 +12,8 @@ if (MSVC)
     add_compile_options(/W4)
 else()
     # additional warnings
-    add_compile_options(-Wall -Wextra -Wpedantic -Wshadow -Wformat=2 -Wunused -O3)
+    add_compile_options(-Wall -Wextra -Wpedantic -Wshadow -Wformat=2 -Wunused -O3 -fopenmp)
+    add_link_options(-fopenmp)
 endif()
 
 include_directories("${PROJECT_SOURCE_DIR}/src")
