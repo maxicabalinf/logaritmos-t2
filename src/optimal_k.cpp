@@ -5,12 +5,7 @@
 
 #include "random_utils.h"
 #include "sorting.h"
-
-#define MAX_K 32
-#define MAX_EXPONENT 64
-#define N 100'000'000
-
-const std::string EXPERIMENTS_FOLDER = "./experiments";
+#include "t2.h"
 
 int main(void) {
     std::filesystem::path exp_path{EXPERIMENTS_FOLDER};

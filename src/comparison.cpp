@@ -9,9 +9,7 @@
 #include "random_utils.h"
 #include "sorting.h"
 #include "stats.h"
-
-#define N 100'000'000  // Tamaño de arreglo a comparar
-const std::string EXPERIMENTS_FOLDER = "./experiments";
+#include "t2.h"
 
 /**
  * @brief Registra en archivo los tiempos de ejecución de Radix sort y Quicksort sobre un mismo vector aleatorio con elementos de un universo discreto [1, u], con u en el rango [2, 2^2, 2^3, ... , 2^64].
