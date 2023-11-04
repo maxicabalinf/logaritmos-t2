@@ -24,16 +24,16 @@ int main(void) {
 
     // Crea archivo que almacenará resultados de experimento.
     std::fstream
-        radix_results(exp_path / "k_per_u", std::ios::out | std::ios::binary),
-        optimal_results(exp_path / "optimal_k", std::ios::out | std::ios::binary);
-    write_headers(radix_results);
+        k_per_u(exp_path / "k_per_u", std::ios::out | std::ios::binary),
+        optimal_ks(exp_path / "optimal_ks", std::ios::out | std::ios::binary);
+    write_headers(k_per_u);
     
     // Realiza 100 ordenamientos por cada k por cada u.
     std::vector<int> optimals(MAX_K - 1);
     int n_repetitions = 100;
     for (int exponent = 1; exponent <= MAX_EXPONENT; exponent++) {
         std::cout << "u=2^" + std::to_string(exponent) << std::endl;
-        radix_results << "2^" + std::to_string(exponent) +" ";
+        k_per_u << "2^" + std::to_string(exponent) +" ";
         unsigned long long u = 1ULL << exponent;
 
         // Crea vector aleatorio.
@@ -65,16 +65,16 @@ int main(void) {
                 optimal_k = k;
             }
             std::cout << "Writing avg. for k=" + std::to_string(k) + " ...";
-            radix_results << std::to_string(kth_avg) +" ";
+            k_per_u << std::to_string(kth_avg) +" ";
             std::cout << " DONE !" << std::endl;
         }
         optimals[exponent - 1] = optimal_k;
-        radix_results << std::endl;
+        k_per_u << std::endl;
     }
 
     // Escribe optimos para cada u en archivo.
     auto len = size(optimals);
-    optimal_results.write(reinterpret_cast<const char*>(&len), sizeof(len));
-    optimal_results.write(reinterpret_cast<const char*>(&optimals[0]), optimals.size()*sizeof(int));
+    optimal_ks.write(reinterpret_cast<const char*>(&len), sizeof(len));
+    optimal_ks.write(reinterpret_cast<const char*>(&optimals[0]), optimals.size()*sizeof(int));
     return 0;
 }
