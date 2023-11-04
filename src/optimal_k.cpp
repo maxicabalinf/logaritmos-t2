@@ -10,7 +10,7 @@
 
 void write_headers(std::fstream &file) {
     file << "u ";
-    for (int k = 1; k < MAX_EXPONENT; k++) {
+    for (int k = 1; k <= MAX_EXPONENT; k++) {
         file << "k=" + std::to_string(k) + " ";
     }
     file << std::endl;
