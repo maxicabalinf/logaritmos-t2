@@ -1,3 +1,5 @@
+#include <omp.h>
+
 #include <algorithm>
 #include <chrono>
 #include <filesystem>
