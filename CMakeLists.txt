@@ -19,11 +19,14 @@ endif()
 include_directories("${PROJECT_SOURCE_DIR}/src")
 
 # Agrupa código fuente común a experimentos.
-add_library(experiment_utils src/sorting.cpp src/sorting.h src/stats.cpp src/stats.h)
+add_library(experiment_utils src/sorting.cpp src/stats.cpp src/random_utils.cpp)
 
 # Crea ejecutables
 add_executable(comparison src/comparison.cpp)
 target_link_libraries(comparison experiment_utils)
+
+add_executable(optimal_k src/optimal_k.cpp)
+target_link_libraries(optimal_k experiment_utils)
 
 add_executable(test_sorting test/test_sorting.cpp)
 target_link_libraries(test_sorting experiment_utils)
