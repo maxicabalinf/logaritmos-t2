@@ -7,7 +7,7 @@
 #include "sorting.h"
 #include "stats.h"
 
-#define N 100000000  // Tamaño de arreglo a comparar
+#define N 100'000'000  // Tamaño de arreglo a comparar
 const std::string EXPERIMENTS_FOLDER = "./experiments";
 
 /**
@@ -17,17 +17,17 @@ const std::string EXPERIMENTS_FOLDER = "./experiments";
  * @param upper_bound Máximo del universo
  * @cite Obtenido de StackOverflow - https://stackoverflow.com/a/23143753
  */
-void random_fill(std::vector<ull> &target, ull upper_bound) {
+void random_fill(std::vector<ull> &target, int size, ull upper_bound) {
     // First create an instance of an engine.
     std::random_device rnd_device;
     // Specify the engine and distribution.
     std::mt19937 mersenne_engine{rnd_device()};  // Generates random integers
     std::uniform_int_distribution<ull> dist{1, upper_bound};
 
-    auto gen = [&dist, &mersenne_engine]() {
-        return dist(mersenne_engine);
-    };
-    generate(begin(target), end(target), gen);
+#pragma omp parallel for
+    for (int i = 0; i < size; ++i) {
+        target[i] = dist(mersenne_engine);
+    }
 }
 
 /**
@@ -49,7 +49,7 @@ int main(void) {
         for (int repetition = 0; repetition < 100; repetition++) {
             std::cout << "Creating random vector ...";
             std::vector<ull> radix_out_of_order(N);
-            random_fill(radix_out_of_order, u);
+            random_fill(radix_out_of_order, N, u);
             std::vector<ull> quick_out_of_order = radix_out_of_order;
             std::cout << " DONE !" << std::endl;
 
