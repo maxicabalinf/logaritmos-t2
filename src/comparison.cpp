@@ -25,13 +25,22 @@ int main(void) {
     std::fstream
         radix_results(exp_path / "radix_results", std::ios::out | std::ios::binary),
         quick_results(exp_path / "quick_results", std::ios::out | std::ios::binary);
+
+    // Lee archivo con los óptimos para cada u.
+    std::fstream optimals_file(exp_path / "optimal_ks", std::ios::in | std::ios::binary);
+    int optimals_len;
+    optimals_file.read(reinterpret_cast<char*>(&optimals_len), sizeof(int));
+    std::vector<int> optimals(optimals_len);
+    optimals_file.read(reinterpret_cast<char*>(&optimals[0]), sizeof(int) * optimals_len);
+    optimals_file.close();
+
     try {
         // Realiza 100 ordenamientos por cada tamaño de universo 2^exponent.
-        for (int exponent = 1; exponent <= 64; exponent++) {
+        for (int exponent = 1; exponent <= optimals_len; exponent++) {
             ull u = 1ULL << exponent;
             std::cout << "u=2^" + std::to_string(exponent) << std::endl;
             std::vector<double> radix_times, quick_times;
-            int k;  // TODO obtener k para cada universo
+            int k = optimals[exponent - 1];
             for (int repetition = 0; repetition < 100; repetition++) {
                 // Crea vector aleatorio común.
                 std::cout << "Creating random vector ...";
