@@ -9,3 +9,4 @@ Este proyecto usa CMake para compilar sus ejecutables. Puede correr el siguiente
 * `stats`: Implementa el cálculo de estadísticas para una muestra de experimentos.
 * `sorting`: Funciones de ordenamiento
 * `comparison`: Ejecuta el experimento para comparar Radix sort con Quicksort
+* `optimal_k`: Ejecuta el experimento para comparar el rendimiento de Radix sort según tamaño de universo y cantidad de bits por ronda.
