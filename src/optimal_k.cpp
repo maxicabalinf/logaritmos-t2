@@ -30,7 +30,7 @@ int main(void) {
     write_headers(k_per_u);
 
     // Realiza 100 ordenamientos por cada k por cada u.
-    std::vector<int> optimals(MAX_K - 1);
+    std::vector<int> optimals(MAX_EXPONENT);
     int n_repetitions = 100;
     for (int exponent = 1; exponent <= MAX_EXPONENT; exponent++) {
         std::cout << "u=2^" + std::to_string(exponent) << std::endl;
