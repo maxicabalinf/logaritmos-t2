@@ -4,7 +4,7 @@
 void test_bucket_sort(void) {
     std::vector<ull> sortee = {1, 20, 39, 47, 28, 8};
     std::vector<ull> expected = {1, 8, 20, 28, 39, 47};
-    bucket_sort(sortee);
+    bucket_sort(sortee, 64, ~0, 0);
     assert(sortee == expected);
 }
 
