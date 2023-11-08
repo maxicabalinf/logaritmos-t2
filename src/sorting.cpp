@@ -8,14 +8,13 @@ void radix_sort(std::vector<ull>& to_be_ordered, int k) {
         bitmask <<= k;
         right_shift += k;
     }
-
 }
 
 void quick_sort(std::vector<ull>& to_be_ordered) {
     // TODO Implementar
 }
 
-void bucket_sort(std::vector<ull>& to_be_ordered, ull max_val, ull bitmask=~0, ull right_shift=0) {
+void bucket_sort(std::vector<ull>& to_be_ordered, ull max_val, ull bitmask = ~0, ull right_shift = 0) {
     std::vector<ull> count(max_val + 1, 0);
     std::vector<ull> temp_ordered(to_be_ordered.size());
     // Contar la frecuencia de cada elemento
@@ -23,7 +22,7 @@ void bucket_sort(std::vector<ull>& to_be_ordered, ull max_val, ull bitmask=~0, u
         count[(num & bitmask) >> right_shift]++;
     }
     for (ull i = 1; i <= max_val; i++) {
-        count[i] += count[i-1];
+        count[i] += count[i - 1];
     }
     for (ull num : to_be_ordered) {
         ull index = count[((num & bitmask) >> right_shift) - 1];
