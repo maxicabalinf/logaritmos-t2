@@ -1,7 +1,14 @@
 #include "sorting.h"
 
 void radix_sort(std::vector<ull>& to_be_ordered, int k) {
-    // TODO Implementar
+    ull bitmask = (1 << k) - 1;
+    ull right_shift = 0;
+    while (right_shift < 64) {
+        bucket_sort(to_be_ordered, (1 << k) - 1, bitmask, right_shift);
+        bitmask <<= k;
+        right_shift += k;
+    }
+
 }
 
 void quick_sort(std::vector<ull>& to_be_ordered) {
