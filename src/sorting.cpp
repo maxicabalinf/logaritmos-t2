@@ -25,9 +25,9 @@ void bucket_sort(std::vector<ull>& to_be_ordered, ull max_val, ull bitmask = ~0,
         count[i] += count[i - 1];
     }
     for (ull num : to_be_ordered) {
-        ull index = count[((num & bitmask) >> right_shift) - 1];
-        temp_ordered[count[((num & bitmask) >> right_shift) - 1]] = num;
-        count[((num & bitmask) >> right_shift) - 1]--;
+        ull num_k_bits = ((num & bitmask) >> right_shift) - 1;
+        temp_ordered[count[num_k_bits]] = num;
+        count[num_k_bits]--;
     }
     to_be_ordered = temp_ordered;
 }
