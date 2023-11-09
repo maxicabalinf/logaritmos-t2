@@ -1,10 +1,11 @@
 #include "sorting.h"
+#include "t2.h"
 
 void radix_sort(std::vector<ull>& to_be_ordered, int k) {
     ull bitmask = (1 << k) - 1;
     ull right_shift = 0;
-    while (right_shift < 64) {
-        bucket_sort(to_be_ordered, (1 << k) - 1, bitmask, right_shift);
+    while (right_shift < MAX_EXPONENT) {
+        bucket_sort(to_be_ordered, (1 << k), bitmask, right_shift);
         bitmask <<= k;
         right_shift += k;
     }
