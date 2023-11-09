@@ -29,11 +29,10 @@ int main(void) {
         optimal_ks(exp_path / "optimal_ks", std::ios::out | std::ios::binary);
     write_headers(k_per_u);
 
-    // Realiza 100 ordenamientos por cada k por cada u.
+    // Realiza n_repetitions por cada k por cada u.
     std::vector<int> optimals(MAX_EXPONENT);
-    int n_repetitions = 100;
+    int n_repetitions = 1;
     for (int exponent = 1; exponent <= MAX_EXPONENT; exponent++) {
-        std::cout << "u=2^" + std::to_string(exponent) << std::endl;
         k_per_u << "2^" + std::to_string(exponent) + " ";
         unsigned long long u = 1ULL << exponent;
 
@@ -47,7 +46,7 @@ int main(void) {
         double min = std::numeric_limits<double>::infinity();
         int optimal_k = -1;
         for (int k = 1; k <= MAX_EXPONENT; k++) {
-            std::cout << "k=" + std::to_string(k) << std::endl;
+            std::cout << "u=2^" + std::to_string(exponent)+ ", k=" + std::to_string(k) << std::endl;
             double kth_total_time = 0.0;
 
             // Toma n_repetitions muestras de tiempos de ordenamiento.
@@ -57,7 +56,7 @@ int main(void) {
                 auto start = std::chrono::high_resolution_clock::now();
                 radix_sort(copy, k);
                 auto stop = std::chrono::high_resolution_clock::now();
-                std::cout << " DONE !" << std::endl;
+                std::cout << " DONE RADIX!" << std::endl;
                 auto delta_t = std::chrono::duration_cast<std::chrono::duration<double, std::milli>>(stop - start).count();
                 kth_total_time += delta_t;
             }
@@ -68,7 +67,7 @@ int main(void) {
             }
             std::cout << "Writing avg. for k=" + std::to_string(k) + " ...";
             k_per_u << std::to_string(kth_avg) + " ";
-            std::cout << " DONE !" << std::endl;
+            std::cout << " DONE !\n" << std::endl;
         }
         optimals[exponent - 1] = optimal_k;
         k_per_u << std::endl;
