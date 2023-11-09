@@ -15,20 +15,26 @@ void quick_sort(std::vector<ull>& to_be_ordered) {
     // TODO Implementar
 }
 
-void bucket_sort(std::vector<ull>& to_be_ordered, ull max_val, ull bitmask = ~0, ull right_shift = 0) {
-    std::vector<ull> count(max_val + 1, 0);
-    std::vector<ull> temp_ordered(to_be_ordered.size());
-    // Contar la frecuencia de cada elemento
+void bucket_sort(std::vector<ull>& to_be_ordered, ull u, ull bitmask = ~0, ull right_shift = 0) {
+    auto n = size(to_be_ordered);  // Tamaño de arreglo a ordenar
+    std::vector<ull> count(u, 0);
+    std::vector<ull> temp_ordered(n);
+
+    // Cuenta la frecuencia de cada elemento
     for (ull num : to_be_ordered) {
-        count[(num & bitmask) >> right_shift]++;
+        count[((num & bitmask) >> right_shift) + 1]++;
     }
-    for (ull i = 1; i <= max_val; i++) {
+
+    // Convierte los valores del arreglo en índices del arreglo final
+    for (ull i = 1; i <= u; i++) {
         count[i] += count[i - 1];
     }
+
+    // Llena el arreglo ordenado
     for (ull num : to_be_ordered) {
-        ull num_k_bits = ((num & bitmask) >> right_shift) - 1;
+        ull num_k_bits = ((num & bitmask) >> right_shift);
         temp_ordered[count[num_k_bits]] = num;
-        count[num_k_bits]--;
+        count[num_k_bits]++;
     }
     to_be_ordered = temp_ordered;
 }
