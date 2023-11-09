@@ -15,8 +15,16 @@ void test_radix_sort(void) {
     assert(sortee == expected);
 }
 
+void test_quick_sort(void) {
+    std::vector<ull> sortee = {1, 20, 39, 47, 28, 8};
+    std::vector<ull> expected = {1, 8, 20, 28, 39, 47};
+    quick_sort(sortee);
+    assert(sortee == expected);
+}
+
 int main(void) {
     test_bucket_sort();
     test_radix_sort();
+    test_quick_sort();
     return 0;
 }
