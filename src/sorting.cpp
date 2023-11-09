@@ -71,7 +71,7 @@ void partition2(std::vector<ull>& a, ull low, ull high, ull& i, ull& j) {
     }
 
     // update i and j
-    i = low - 1;
+    i = (low == 0) ? low : low - 1;
     j = mid;  // or high+1
 }
 
@@ -90,7 +90,9 @@ void quicksort_(std::vector<ull>& a, ull low, ull high) {
     ull i, j;
 
     // Note that i and j are passed as reference
+    std::cout << "Partitioning w/ (low, high)=" + std::to_string(low) + ", " + std::to_string(high) + ")...";
     partition2(a, low, high, i, j);
+    std::cout << " DONE !\n";
 
     // Recur
     quicksort_(a, low, i);
