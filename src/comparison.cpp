@@ -71,14 +71,13 @@ int main(void) {
             }
 
             // Procesa muestra de 100 eventos por método.
-            std::cout << "Calculating stats ...";
             stats radix_stats = calculate_stats(radix_times);
             stats quick_stats = calculate_stats(quick_times);
 
             // Guarda resultados en archivo.
             save_results(radix_results, u, radix_stats);
             save_results(quick_results, u, quick_stats);
-            std::cout << " SAVED !" << std::endl;
+            std::cout << "SAVED !" << std::endl;
         }
     } catch (std::bad_alloc& ba) {
         std::cerr << "Memory error: " << ba.what() << std::endl;
