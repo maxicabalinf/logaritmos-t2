@@ -49,6 +49,15 @@ void bucket_sort(std::vector<ull>& to_be_ordered, ull u, ull bitmask = ~0, ull r
     to_be_ordered = temp_ordered;
 }
 
+/**
+ * @brief Selecciona un pivote y posiciona todas las ocurrencias del pivote en un segmento central del arreglo a ordenar, entregando los índices que delimitan las porciones menor y mayor al pivote.
+ * 
+ * @param a Arreglo a ordenar.
+ * @param low Índice izquierdo de la porción a procesar.
+ * @param high Índice derecho de la porción a procesar.
+ * @param i Variable donde se contendrá el índice del último elemento del subarreglo menor al pivote.
+ * @param j Variable donde se contendrá el índice del primer elemento del subarreglo mayor al pivote.
+ */
 void partition2(std::vector<ull>& a, ull low, ull high, ull& i, ull& j) {
     // To handle 2 elements
     if (high - low <= 1) {
