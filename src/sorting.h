@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 
+#include "t2.h"
+
 /**
  * @brief Ordena un vector con elementos de un universo discreto [0...u-1] de tamaño u según un subconjunto de bits, usando Bucket sort.
  *

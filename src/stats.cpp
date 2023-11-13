@@ -16,8 +16,8 @@ std::pair<double, double> confidence_interval(int percentage, double mean, doubl
     return std::make_pair(mean - offset, mean + offset);
 }
 
-void save_results(std::fstream &file, unsigned long long N, stats &measurements) {
-    file << std::to_string(N) + " ";
+void save_results(std::fstream &file, unsigned long long n, stats &measurements) {
+    file << std::to_string(n) + " ";
     file << std::get<0>(measurements) << " ";
     file << std::get<1>(measurements) << " ";
     file << "[";
